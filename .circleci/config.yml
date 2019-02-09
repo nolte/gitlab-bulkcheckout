@@ -307,18 +307,6 @@ jobs:
 
 workflows:
   version: 2
-  execute_smoke_test:
-    jobs:
-      - check_grade_up_build
-      - statictests:
-          requires:
-            - check_grade_up_build
-      - builddocs:
-          requires:
-            - statictests
-      - testing:
-          requires:
-            - statictests
   build_and_test:
     jobs:
       - check_grade_up_build
@@ -343,13 +331,16 @@ workflows:
           requires:
             - testing
             - builddocs
-      - generate-changelog:
+      - integrate_release:
           filters:
             branches:
               only:
                 - /release\/v.*-pre/
           requires:
             - finializebuild
+      - generate-changelog:
+          requires:
+            - integrate_release
       - create_gh_release:
           requires:
             - generate-changelog
