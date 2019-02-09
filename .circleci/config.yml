@@ -310,7 +310,6 @@ jobs:
       - run:
           name: delete the release branch
           command: |
-            git checkout master
             git push origin master
             git push origin --delete ${CIRCLE_BRANCH}
 
