@@ -1,0 +1,54 @@
+gitlab\_bulkcheckout package
+============================
+
+Submodules
+----------
+
+gitlab\_bulkcheckout.GitBulkCheckoutManager module
+--------------------------------------------------
+
+.. automodule:: gitlab_bulkcheckout.GitBulkCheckoutManager
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+gitlab\_bulkcheckout.GitlabConnector module
+-------------------------------------------
+
+.. automodule:: gitlab_bulkcheckout.GitlabConnector
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+gitlab\_bulkcheckout.cli module
+-------------------------------
+
+.. automodule:: gitlab_bulkcheckout.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+gitlab\_bulkcheckout.log module
+-------------------------------
+
+.. automodule:: gitlab_bulkcheckout.log
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+gitlab\_bulkcheckout.objects module
+-----------------------------------
+
+.. automodule:: gitlab_bulkcheckout.objects
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: gitlab_bulkcheckout
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,201 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>gitlab_bulkcheckout package &#8212; Gitlab Bulk Checkout  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="gitlab-bulkcheckout-package">
+<h1>gitlab_bulkcheckout package<a class="headerlink" href="#gitlab-bulkcheckout-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gitlab_bulkcheckout.GitBulkCheckoutManager">
+<span id="gitlab-bulkcheckout-gitbulkcheckoutmanager-module"></span><h2>gitlab_bulkcheckout.GitBulkCheckoutManager module<a class="headerlink" href="#module-gitlab_bulkcheckout.GitBulkCheckoutManager" title="Permalink to this headline">¶</a></h2>
+<p>Local Git Checkout Tool repo Management</p>
+<dl class="class">
+<dt id="gitlab_bulkcheckout.GitBulkCheckoutManager.ProjectExecuter">
+<em class="property">class </em><code class="descclassname">gitlab_bulkcheckout.GitBulkCheckoutManager.</code><code class="descname">ProjectExecuter</code><span class="sig-paren">(</span><em>basePath</em>, <em>mapper</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/GitBulkCheckoutManager.html#ProjectExecuter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.GitBulkCheckoutManager.ProjectExecuter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gitlab_bulkcheckout.GitBulkCheckoutManager.ProjectExecuter.checkoutProject">
+<code class="descname">checkoutProject</code><span class="sig-paren">(</span><em>projectBaseDir</em>, <em>project</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/GitBulkCheckoutManager.html#ProjectExecuter.checkoutProject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.GitBulkCheckoutManager.ProjectExecuter.checkoutProject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gitlab_bulkcheckout.GitBulkCheckoutManager.ProjectExecuter.processProject">
+<code class="descname">processProject</code><span class="sig-paren">(</span><em>project</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/GitBulkCheckoutManager.html#ProjectExecuter.processProject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.GitBulkCheckoutManager.ProjectExecuter.processProject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gitlab_bulkcheckout.GitlabConnector">
+<span id="gitlab-bulkcheckout-gitlabconnector-module"></span><h2>gitlab_bulkcheckout.GitlabConnector module<a class="headerlink" href="#module-gitlab_bulkcheckout.GitlabConnector" title="Permalink to this headline">¶</a></h2>
+<p>Local Git Checkout Tool repo Management</p>
+<dl class="class">
+<dt id="gitlab_bulkcheckout.GitlabConnector.GitLabConnector">
+<em class="property">class </em><code class="descclassname">gitlab_bulkcheckout.GitlabConnector.</code><code class="descname">GitLabConnector</code><span class="sig-paren">(</span><em>host</em>, <em>token</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/GitlabConnector.html#GitLabConnector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.GitlabConnector.GitLabConnector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gitlab_bulkcheckout.GitlabConnector.GitLabConnector.findProjectsFromGroups">
+<code class="descname">findProjectsFromGroups</code><span class="sig-paren">(</span><em>groups</em>, <em>activity</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/GitlabConnector.html#GitLabConnector.findProjectsFromGroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.GitlabConnector.GitLabConnector.findProjectsFromGroups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gitlab_bulkcheckout.cli">
+<span id="gitlab-bulkcheckout-cli-module"></span><h2>gitlab_bulkcheckout.cli module<a class="headerlink" href="#module-gitlab_bulkcheckout.cli" title="Permalink to this headline">¶</a></h2>
+<p>Main <cite>gitlab_bulkcheckout</cite> CLI.</p>
+</div>
+<div class="section" id="module-gitlab_bulkcheckout.log">
+<span id="gitlab-bulkcheckout-log-module"></span><h2>gitlab_bulkcheckout.log module<a class="headerlink" href="#module-gitlab_bulkcheckout.log" title="Permalink to this headline">¶</a></h2>
+<p>Module for setting up logging.</p>
+<dl class="function">
+<dt id="gitlab_bulkcheckout.log.configure_logger">
+<code class="descclassname">gitlab_bulkcheckout.log.</code><code class="descname">configure_logger</code><span class="sig-paren">(</span><em>stream_level='DEBUG'</em>, <em>debug_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/log.html#configure_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.log.configure_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure logging for cookiecutter.</p>
+<p>Set up logging to stdout with given level. If <code class="docutils literal notranslate"><span class="pre">debug_file</span></code> is given set
+up logging to file with DEBUG level.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gitlab_bulkcheckout.objects">
+<span id="gitlab-bulkcheckout-objects-module"></span><h2>gitlab_bulkcheckout.objects module<a class="headerlink" href="#module-gitlab_bulkcheckout.objects" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gitlab_bulkcheckout.objects.CheckoutPreference">
+<em class="property">class </em><code class="descclassname">gitlab_bulkcheckout.objects.</code><code class="descname">CheckoutPreference</code><span class="sig-paren">(</span><em>preferences</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/objects.html#CheckoutPreference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.objects.CheckoutPreference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gitlab_bulkcheckout.objects.CheckoutPreference.toLocalProjctName">
+<code class="descname">toLocalProjctName</code><span class="sig-paren">(</span><em>project</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/objects.html#CheckoutPreference.toLocalProjctName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.objects.CheckoutPreference.toLocalProjctName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gitlab_bulkcheckout.objects.CheckoutPreferenceManager">
+<em class="property">class </em><code class="descclassname">gitlab_bulkcheckout.objects.</code><code class="descname">CheckoutPreferenceManager</code><span class="sig-paren">(</span><em>mapping_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/objects.html#CheckoutPreferenceManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.objects.CheckoutPreferenceManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gitlab_bulkcheckout.objects.CheckoutPreferenceManager.getGroupConfig">
+<code class="descname">getGroupConfig</code><span class="sig-paren">(</span><em>groupId</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/objects.html#CheckoutPreferenceManager.getGroupConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.objects.CheckoutPreferenceManager.getGroupConfig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gitlab_bulkcheckout.objects.CheckoutPreferenceManager.getLocalProjectName">
+<code class="descname">getLocalProjectName</code><span class="sig-paren">(</span><em>project</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/objects.html#CheckoutPreferenceManager.getLocalProjectName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.objects.CheckoutPreferenceManager.getLocalProjectName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gitlab_bulkcheckout.objects.CheckoutPreferenceManager.getManagedGroups">
+<code class="descname">getManagedGroups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gitlab_bulkcheckout/objects.html#CheckoutPreferenceManager.getManagedGroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gitlab_bulkcheckout.objects.CheckoutPreferenceManager.getManagedGroups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gitlab_bulkcheckout">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gitlab_bulkcheckout" title="Permalink to this headline">¶</a></h2>
+<p>Top-level package for project manager.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Gitlab Bulk Checkout</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage/usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/container_usage.html">Container Usage</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/gitlab_bulkcheckout.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

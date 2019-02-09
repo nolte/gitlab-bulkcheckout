@@ -1,0 +1,7 @@
+gitlab_bulkcheckout
+===================
+
+.. toctree::
+   :maxdepth: 4
+
+   gitlab_bulkcheckout

@@ -1,0 +1,186 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Gitlab Bulk Checkout Tool &#8212; Gitlab Bulk Checkout  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage/usage.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p><a class="reference external" href="https://travis-ci.org/nolte/gitlab-bulkcheckout"><img alt="Travis CI build status" src="https://travis-ci.org/nolte/gitlab-bulkcheckout.svg?branch=master" /></a> <a class="reference external" href="https://www.codefactor.io/repository/github/nolte/gitlab-bulkcheckout"><img alt="CodeFactor" src="https://www.codefactor.io/repository/github/nolte/gitlab-bulkcheckout/badge" /></a> <a class="reference external" href="https://gitlab-bulkcheckout.readthedocs.io/en/stable/?badge=stable"><img alt="Documentation Status" src="https://readthedocs.org/projects/gitlab-bulkcheckout/badge/?version=latest" /></a> <a class="reference external" href="https://microbadger.com/images/nolte/gitlab-bulkcheckout"><img alt="image" src="https://images.microbadger.com/badges/image/nolte/gitlab-bulkcheckout.svg" /></a> <a class="reference external" href="https://microbadger.com/images/nolte/gitlab-bulkcheckout"><img alt="version" src="https://images.microbadger.com/badges/version/nolte/gitlab-bulkcheckout.svg" /></a></p>
+<div class="section" id="gitlab-bulk-checkout-tool">
+<h1>Gitlab Bulk Checkout Tool<a class="headerlink" href="#gitlab-bulk-checkout-tool" title="Permalink to this headline">¶</a></h1>
+<p>Simple utitlity written in <a class="reference external" href="https://www.python.org">Python</a> for the local repositories.
+In a Time of SaaS, Isac and microservices, it can happen that you need many small repositories at your local Machine for Development, so it didn`t make fun to pull so many repositories.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>sort gitlab grops to fs folder</li>
+<li>append a prefix to the repos</li>
+<li>pull changes from origin</li>
+</ul>
+</div>
+<div class="section" id="using-tox-build-script">
+<h2>Using Tox Build Script<a class="headerlink" href="#using-tox-build-script" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> ~/development/lib/virtualenv/tox/bin/activate
+tox
+</pre></div>
+</div>
+<p>The tox script create a installable dist under <code class="docutils literal notranslate"><span class="pre">./.tox/dist/*.tar.gz</span></code></p>
+</div>
+<div class="section" id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<p>For easy usage, the tool can be wrapped with docker, so you don`t need a local python env for using.</p>
+<div class="section" id="build">
+<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build -t nolte/gitlab-bulkcheckout .
+</pre></div>
+</div>
+<p>ssh agent
+<a class="reference external" href="https://kb.iu.edu/d/aeww">https://kb.iu.edu/d/aeww</a></p>
+</div>
+<div class="section" id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -it <span class="se">\</span>
+  --user<span class="o">=</span><span class="si">${</span><span class="nv">UID</span><span class="si">}</span>:<span class="k">$(</span>id -g <span class="k">$(</span>whoami<span class="k">))</span> <span class="se">\</span>
+  -v <span class="nv">$SSH_AUTH_SOCK</span>:/ssh-agent <span class="se">\</span>
+  -e <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span>/ssh-agent <span class="se">\</span>
+  -e <span class="nv">GROUPS_MAPPINGS</span><span class="o">=</span>/app/gitlab_groupMapping.yml <span class="se">\</span>
+  -e <span class="nv">GITLAB_TOKEN</span><span class="o">=</span><span class="k">$(</span>pass /internet/gitlab.com/tokens/management<span class="k">)</span> <span class="se">\</span>
+  -e <span class="nv">PROJECTS_BASE</span><span class="o">=</span>/tmp/bulkcheckout <span class="se">\</span>
+  -w /tmp/bulkcheckout <span class="se">\</span>
+  -v /tmp/bulkcheckout:/tmp/bulkcheckout <span class="se">\</span>
+  -v <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/.ssh:/home/builder/.ssh:ro <span class="se">\</span>
+  -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>/gitlab_groupMapping.yml:/app/gitlab_groupMapping.yml:ro <span class="se">\</span>
+  nolte/gitlab-bulkcheckout -v checkoutbulk
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>Gitlab Bulk Checkout Tool<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage/usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage/usage.html#gitlab-bulkcheckout">gitlab_bulkcheckout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/usage.html#config">Config</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage/container_usage.html">Container Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage/container_usage.html#container-run-parameters">Container Run Parameters</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<span class="target" id="module-gitlab_bulkcheckout"></span><p>Top-level package for project manager.</p>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Gitlab Bulk Checkout</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage/usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/container_usage.html">Container Usage</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="usage/usage.html" title="next chapter">Usage</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

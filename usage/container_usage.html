@@ -1,0 +1,167 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Container Usage &#8212; Gitlab Bulk Checkout  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Usage" href="usage.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="container-usage">
+<h1>Container Usage<a class="headerlink" href="#container-usage" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://microbadger.com/images/nolte/gitlab-bulkcheckout"><img alt="image" src="https://images.microbadger.com/badges/image/nolte/gitlab-bulkcheckout.svg" /></a> <a class="reference external" href="https://microbadger.com/images/nolte/gitlab-bulkcheckout"><img alt="version" src="https://images.microbadger.com/badges/version/nolte/gitlab-bulkcheckout.svg" /></a> <a class="reference external" href="https://hub.docker.com/r/nolte/gitlab-bulkcheckout"><img alt="docker stars" src="https://img.shields.io/docker/stars/nolte/gitlab-bulkcheckout.svg?style=flat" /></a> <a class="reference external" href="https://hub.docker.com/r/nolte/gitlab-bulkcheckout"><img alt="docker pulls" src="https://img.shields.io/docker/pulls/nolte/gitlab-bulkcheckout.svg?style=flat" /></a></p>
+<p>For easy and quickly usage you can use the Dockerfile from <a class="reference external" href="https://hub.docker.com/r/nolte/gitlab-bulkcheckout">Dockerhub</a>.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">nolte</span><span class="o">/</span><span class="n">gitlab</span><span class="o">-</span><span class="n">bulkcheckout</span><span class="p">:</span><span class="n">latest</span>
+</pre></div>
+</div>
+<p>For wrapping the tool, and checkout to your local FS it is required that you define some additional <a class="reference internal" href="#usage-container-run-parameters"><span class="std std-ref">Container Run Parameters</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="docker-checkout-command">
+<div class="code-block-caption"><span class="caption-text">execute checkout</span><a class="headerlink" href="#docker-checkout-command" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -it <span class="se">\</span>
+  --user<span class="o">=</span><span class="si">${</span><span class="nv">UID</span><span class="si">}</span>:<span class="k">$(</span>id -g <span class="k">$(</span>whoami<span class="k">))</span> <span class="se">\</span>
+  -v <span class="si">${</span><span class="nv">SSH_AUTH_SOCK</span><span class="si">}</span>:/ssh-agent <span class="se">\</span>
+  -e <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span>/ssh-agent <span class="se">\</span>
+  -e <span class="nv">GROUPS_MAPPINGS</span><span class="o">=</span>/app/gitlab_groupMapping.yml <span class="se">\</span>
+  -e <span class="nv">GITLAB_TOKEN</span><span class="o">=</span><span class="k">$(</span>pass /internet/gitlab.com/tokens/management<span class="k">)</span> <span class="se">\</span>
+  -e <span class="nv">PROJECTS_BASE</span><span class="o">=</span>/tmp/bulkcheckout <span class="se">\</span>
+  -w /tmp/bulkcheckout <span class="se">\</span>
+  -v /tmp/bulkcheckout:/tmp/bulkcheckout <span class="se">\</span>
+  -v <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/.ssh:/home/builder/.ssh:ro <span class="se">\</span>
+  -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>/gitlab_groupMapping.yml:/app/gitlab_groupMapping.yml:ro <span class="se">\</span>
+  nolte/gitlab-bulkcheckout -v checkoutbulk
+</pre></div>
+</div>
+</div>
+<div class="section" id="container-run-parameters">
+<span id="usage-container-run-parameters"></span><h2>Container Run Parameters<a class="headerlink" href="#container-run-parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">--user</span> <span class="pre">${UID}:$(id</span> <span class="pre">-g</span> <span class="pre">$(whoami))</span></code></dt>
+<dd>The Container User will mapped to your user and group from the Host System, see <a class="reference external" href="https://docs.docker.com/engine/reference/run/#user">User</a>.</dd>
+</dl>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">$SSH_AUTH_SOCK</span></code> <em>(optional)</em></dt>
+<dd>Required for forward the User SSH Agent from the Host System to the container.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">SSH_AUTH_SOCK</span></code> <em>(optional)</em></dt>
+<dd>see <a class="reference internal" href="#usage-container-run-parameters-ssh-forward"><span class="std std-ref">-v $SSH_AUTH_SOCK</span></a></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">GROUPS_MAPPINGS</span></code></dt>
+<dd>The Path to the checkout config
+(see: <a class="reference internal" href="usage.html#cli-parameters"><span class="std std-ref">gitlab_bulkcheckout</span></a>, <a class="reference internal" href="#usage-container-run-parameters-volume-checkout-config"><span class="std std-ref">Config Volume</span></a>, <a class="reference internal" href="usage.html#cli-config"><span class="std std-ref">Config</span></a>,)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">GITLAB_TOKEN</span></code></dt>
+<dd><a class="reference external" href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html">Gitlab Access Token</a> for using the <a class="reference external" href="https://docs.gitlab.com/ee/api/">Gitlab API</a> (see: <a class="reference internal" href="usage.html#cli-parameters"><span class="std std-ref">gitlab_bulkcheckout</span></a>)
+This example use the Commandline Tool <a class="reference external" href="https://www.passwordstore.org/">pass</a> for manage this secred.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">PROJECTS_BASE</span></code></dt>
+<dd>The Local Checkout Location, this path should be mapped to your Host System, (see: <a class="reference internal" href="usage.html#cli-parameters"><span class="std std-ref">gitlab_bulkcheckout</span></a>).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-w</span> <span class="pre">/tmp/bulkcheckout</span></code></dt>
+<dd>The Container <a class="reference external" href="https://docs.docker.com/engine/reference/run/#workdir">Workingdir</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">/tmp/bulkcheckout:/tmp/bulkcheckout</span></code></dt>
+<dd>Some Folder mounted to your Host System, used as checkout Base.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">${HOME}/.ssh:/home/builder/.ssh:ro</span></code></dt>
+<dd>Mount your local SSH folder, for checkout the repositories over ssh.</dd>
+</dl>
+<dl class="docutils" id="usage-container-run-parameters-volume-checkout-config">
+<dt><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">${PWD}/gitlab_groupMapping.yml:/app/gitlab_groupMapping.yml:ro</span></code></dt>
+<dd>The Used config file (see: <a class="reference internal" href="usage.html#cli-config"><span class="std std-ref">Config</span></a>)</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Gitlab Bulk Checkout</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Container Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#container-run-parameters">Container Run Parameters</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="usage.html" title="previous chapter">Usage</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/usage/container_usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
