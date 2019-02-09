@@ -64,3 +64,9 @@ WORKDIR ${APP_FOLDER}
 ENTRYPOINT ["gitlab_bulkcheckout"]
 #,"gitlab-bulkcheckout"
 CMD ["--help"]
+
+
+ARG VCS_REF
+
+LABEL org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/nolte/gitlab-bulkcheckout"
