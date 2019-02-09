@@ -14,7 +14,8 @@ Getting Started
 .. toctree::
    :maxdepth: 2
 
-   usage
+   usage/usage
+   usage/container_usage
 
 
 .. automodule:: gitlab_bulkcheckout

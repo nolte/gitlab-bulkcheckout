@@ -23,7 +23,7 @@ def main(verbose, debug_file):
     configure_logger(stream_level="DEBUG" if verbose else "INFO", debug_file=debug_file)
 
 
-@main.command(help="get current version")
+@main.command(help="Display the current version.")
 def version():
     """Display the current version."""
 

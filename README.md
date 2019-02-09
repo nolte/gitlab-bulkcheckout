@@ -1,7 +1,7 @@
 # Gitlab Bulk Checkout Tool
 
-Simple utitlity written in [Python](https://www.python.org) for handle the local repositories.
-In a Time of SaaS, Isac and microservices, it can happen that you need many small repositories at your local Machine for Development.
+Simple utitlity written in [Python](https://www.python.org) for the local repositories.
+In a Time of SaaS, Isac and microservices, it can happen that you need many small repositories at your local Machine for Development, so it didn`t make fun to pull so many repositories.
 
 ## Features
 
