@@ -305,31 +305,6 @@ jobs:
             git push origin master
             git push origin --delete ${CIRCLE_BRANCH}
 
-  execute_integration_tests:
-    <<: *container_python
-    working_directory: /tmp/workspaces/build
-    environment:
-      CHROMEDRIVER_VERSION: 2.45
-      TOX_TEST_ENV: py36-github-integrationtests
-    steps:
-      - attach_workspace:
-          at: /tmp/workspaces
-      - *run_task_install_tox_dependencies
-      - *run_task_install_chromedriver_dependencies
-      - run:
-          name: execute selenium integrationtests
-          command: |
-            export PATH=$PATH:${HOME}/chromedriver
-            tox -e ${TOX_TEST_ENV}
-            mkdir -p /tmp/workspaces/testreports
-            cp -r .tox/${TOX_TEST_ENV}/tmp/reports/ /tmp/workspaces/testreports
-      - store_test_results:
-          path: /tmp/workspaces/testreports
-      - persist_to_workspace:
-          root: /tmp/workspaces/
-          paths:
-              - testreports
-
 workflows:
   version: 2
   execute_smoke_test:
@@ -371,19 +346,13 @@ workflows:
           requires:
             - testing
             - builddocs
-      - integrate_release:
+      - generate-changelog:
           filters:
             branches:
               only:
                 - /release\/v.*-pre/
           requires:
             - finializebuild
-      - generate-changelog:
-          requires:
-            - integrate_release
       - create_gh_release:
           requires:
             - generate-changelog
-      - execute_integration_tests:
-          requires:
-            - publishghpage
