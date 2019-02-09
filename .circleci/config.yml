@@ -261,7 +261,7 @@ jobs:
           name: merge to master
           command: |
             git checkout master
-            git merge --ff-only ${CIRCLE_BRANCH}
+            git merge ${CIRCLE_BRANCH}
             git commit -m "merge"
             git checkout ${CIRCLE_BRANCH}
             echo "merge to master"
