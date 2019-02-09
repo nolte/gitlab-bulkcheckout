@@ -3,4 +3,4 @@
 """Top-level package for project manager."""
 
 __author__ = """nolte"""
-__version__ = "0.3.0"
+__version__ = "0.4.0-dev"
