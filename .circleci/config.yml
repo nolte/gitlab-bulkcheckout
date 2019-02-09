@@ -310,7 +310,7 @@ jobs:
                 --repo ${CIRCLE_PROJECT_REPONAME} \
                 --tag "v${CURRENT_VERSION}" \
                 --name "v${CURRENT_VERSION}" \
-                --file /tmp/workspaces/build/.tox/dist/gitlab_bulkcheckout-*
+                --file /tmp/workspaces/build/.tox/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.zip
       - run:
           name: delete the release branch
           command: |
