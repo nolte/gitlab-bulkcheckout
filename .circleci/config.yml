@@ -261,8 +261,12 @@ jobs:
           name: merge to master
           command: |
             git checkout master
-            git merge ${CIRCLE_BRANCH}
+            git merge --ff-only ${CIRCLE_BRANCH}
+            git commit -m "merge"
+            git checkout ${CIRCLE_BRANCH}
             echo "merge to master"
+
+
       - *run_task_load_current_version_bumpversion_cfg
       - run:
           name: create release tag
@@ -302,6 +306,7 @@ jobs:
       - run:
           name: delete the release branch
           command: |
+            git checkout master
             git push origin master
             git push origin --delete ${CIRCLE_BRANCH}
 
