@@ -29,3 +29,4 @@ jobs:
       on:
         distributions: sdist bdist_wheel
         repo: nolte/gitlab-bulkcheckout
+        branch: master
