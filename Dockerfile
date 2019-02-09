@@ -56,6 +56,13 @@ RUN apk --no-cache add \
     git \
     openssh-client
 
+# ARG MICROSCANNER_TOKEN
+# RUN apk add --no-cache ca-certificates && update-ca-certificates && \
+#     wget -O /microscanner https://get.aquasec.com/microscanner && \
+#     chmod +x /microscanner && \
+#     /microscanner ${MICROSCANNER_TOKEN} --continue-on-failure && \
+#     rm -rf /microscanner
+
 USER ${CONTAINER_USER}
 
 WORKDIR ${APP_FOLDER}

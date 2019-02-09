@@ -1,6 +1,6 @@
 docker run -it \
   --user=${UID}:$(id -g $(whoami)) \
-  -v $SSH_AUTH_SOCK:/ssh-agent \
+  -v ${SSH_AUTH_SOCK}:/ssh-agent \
   -e SSH_AUTH_SOCK=/ssh-agent \
   -e GROUPS_MAPPINGS=/app/gitlab_groupMapping.yml \
   -e GITLAB_TOKEN=$(pass /internet/gitlab.com/tokens/management) \

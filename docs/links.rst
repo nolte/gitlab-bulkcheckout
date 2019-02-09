@@ -1,4 +1,4 @@
-.. |Travis CI build status| image:: https://travis-ci.org/nolte/gitlab-bulkcheckout.svg?branch=develop
+.. |Travis CI build status| image:: https://travis-ci.org/nolte/gitlab-bulkcheckout.svg?branch=master
     :target: https://travis-ci.org/nolte/gitlab-bulkcheckout
 .. |CircleCI build status| image:: https://circleci.com/gh/nolte/gitlab-bulkcheckout.svg?style=svg
     :target: https://circleci.com/gh/nolte/gitlab-bulkcheckout
@@ -19,6 +19,16 @@
 .. |microbadger version| image:: https://images.microbadger.com/badges/version/nolte/gitlab-bulkcheckout.svg
     :target: https://microbadger.com/images/nolte/gitlab-bulkcheckout
     :alt: version
+
+.. |docker build status| image:: https://img.shields.io/docker/build/nolte/gitlab-bulkcheckout.svg?style=flat
+    :target: https://microbadger.com/images/nolte/gitlab-bulkcheckout
+    :alt: version
+.. |docker build type| image:: https://img.shields.io/docker/automated/nolte/gitlab-bulkcheckout.svg?style=flat
+    :target: https://hub.docker.com/r/nolte/gitlab-bulkcheckout
+.. |docker stars| image:: https://img.shields.io/docker/stars/nolte/gitlab-bulkcheckout.svg?style=flat
+    :target: https://hub.docker.com/r/nolte/gitlab-bulkcheckout
+.. |docker pulls| image:: https://img.shields.io/docker/pulls/nolte/gitlab-bulkcheckout.svg?style=flat
+    :target: https://hub.docker.com/r/nolte/gitlab-bulkcheckout
 
 .. _CircleCI: https://circleci.com
 .. _Selenium: https://pytest-selenium.readthedocs.io/en/latest/index.html
