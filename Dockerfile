@@ -17,10 +17,9 @@ RUN addgroup -g ${PGID} ${CONTAINER_USER} && \
 ARG PIP_VERSION=3.7.0
 RUN pip install tox==${PIP_VERSION}
 
-RUN apk add --update \
+RUN apk --no-cache add  \
     tar \
-    git \
-  && rm -rf /var/cache/apk/*
+    git
 
 FROM BUILDLAYER as BUILDER
 
@@ -52,10 +51,9 @@ RUN addgroup -g ${PGID} ${CONTAINER_USER} && \
     mkdir -p ${APP_FOLDER} && \
     chown -R ${CONTAINER_USER}:${CONTAINER_USER} ${APP_FOLDER}
 
-RUN apk add --update \
+RUN apk --no-cache add \
     git \
-    openssh-client \
-  && rm -rf /var/cache/apk/*
+    openssh-client
 
 USER ${CONTAINER_USER}
 
