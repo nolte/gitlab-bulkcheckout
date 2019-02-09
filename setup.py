@@ -6,7 +6,7 @@
 from setuptools import find_packages, setup
 
 with open("README.md", "r") as fh:
-    long_description = fh.read()
+    readme = fh.read()
 
 
 requirements = ["Click==7.0", "pyyaml>=4.2b1", "python-gitlab==1.7.0", "gitpython==2.1.11"]
@@ -33,6 +33,7 @@ setup(
     install_requires=requirements,
     license="Apache Software License 2.0",
     long_description=readme,
+    long_description_content_type="text/markdown",
     include_package_data=True,
     keywords="gitlab_bulkcheckout",
     name="gitlab_bulkcheckout",
