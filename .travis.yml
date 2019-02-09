@@ -15,7 +15,8 @@ install:
 - pip install tox-travis
 - pip install -e ${TRAVIS_BUILD_DIR}
 script:
-- tox -e ${SCENARIO_NAME}
+#- tox-e ${SCENARIO_NAME} --sdistonly
+- tox 
 deploy:
   provider: pypi
   user: nolte07
