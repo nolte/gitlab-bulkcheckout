@@ -15,21 +15,21 @@ script:
 
 jobs:
   include:
-  - stage: deploy
-    python: 3.6
-    install:
-      - pip install tox-travis
-    script: tox
-    deploy:
-      provider: pypi
-      skip_existing: true
-      user: nolte07
-      password:
-        secure: qs9anHkElr8f3+jH7gYBUMDzmyDCMHHVpv/nEe0gEIqPxDkVeqbgAAl6HnqWRp4FZfYUbZyGsSO4VMddgRvmCjX0F/3g1w/+FwES0dy0RL6pRyB4XWIIhEBLBlqFn4V/cCgYYx+IgG8I0l+5j8lhB6lyfek5kHlECZesMOkmRkmD1RZ0aHI+4f240AoOG+g2o6oqE0k2t94lqTUeOErG2ChuaP7s0WqEGQpA5tX4jwLtAgzxbnx+Jmu4WugtlTKzVhqPb3Qv+5nkayc6ezDECy5PkTVCcymhyXIvweEojQPjvYUeRVZaWj4O2O81ZPdFwjVbt0JoB8wwTavjwZ80EvHzFZy2Jxk/DcQO55Z2nfiPueUl8AC/QQ8aeQm/KciKA3rBG5vohlI2umwrsLxnqa7Qn/YkXAQAsasOAZOG6KXk11iAHt7BTR1S+LGK1JRbixWxcHHVXOV8VJO1tzeekL7t6rttTZAb7yNjElRLzFy22lahFb8E1VQEwz6OgKN6Qp4aiMnTFK9SZAoAz4T8wMtx+1LvCxxZHoLrBM0SQuutv43fC4tKIR5uh9tKF6NqvAyZzb7PPnJ/DJgwW4AgFAEIO5g/jdABhJwiMtv6J2KBo0PwTLkGBpO7yQQExi2WOn0r5zYzDvqPf3CvFEGB5NF3Dv5OtsjKsvq+hgIUcgc=
-      on:
-        distributions: sdist bdist_wheel
-        repo: nolte/gitlab-bulkcheckout
-        branch: master
+#  - stage: deploy
+#    python: 3.6
+#    install:
+#      - pip install tox-travis
+#    script: tox
+#    deploy:
+#      provider: pypi
+#      skip_existing: true
+#      user: nolte07
+#      password:
+#        secure: qs9anHkElr8f3+jH7gYBUMDzmyDCMHHVpv/nEe0gEIqPxDkVeqbgAAl6HnqWRp4FZfYUbZyGsSO4VMddgRvmCjX0F/3g1w/+FwES0dy0RL6pRyB4XWIIhEBLBlqFn4V/cCgYYx+IgG8I0l+5j8lhB6lyfek5kHlECZesMOkmRkmD1RZ0aHI+4f240AoOG+g2o6oqE0k2t94lqTUeOErG2ChuaP7s0WqEGQpA5tX4jwLtAgzxbnx+Jmu4WugtlTKzVhqPb3Qv+5nkayc6ezDECy5PkTVCcymhyXIvweEojQPjvYUeRVZaWj4O2O81ZPdFwjVbt0JoB8wwTavjwZ80EvHzFZy2Jxk/DcQO55Z2nfiPueUl8AC/QQ8aeQm/KciKA3rBG5vohlI2umwrsLxnqa7Qn/YkXAQAsasOAZOG6KXk11iAHt7BTR1S+LGK1JRbixWxcHHVXOV8VJO1tzeekL7t6rttTZAb7yNjElRLzFy22lahFb8E1VQEwz6OgKN6Qp4aiMnTFK9SZAoAz4T8wMtx+1LvCxxZHoLrBM0SQuutv43fC4tKIR5uh9tKF6NqvAyZzb7PPnJ/DJgwW4AgFAEIO5g/jdABhJwiMtv6J2KBo0PwTLkGBpO7yQQExi2WOn0r5zYzDvqPf3CvFEGB5NF3Dv5OtsjKsvq+hgIUcgc=
+#      on:
+#        distributions: sdist bdist_wheel
+#        repo: nolte/gitlab-bulkcheckout
+#        branch: master
   - stage: deploy pypidev
     python: 3.6
     install:
