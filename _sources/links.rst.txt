@@ -30,6 +30,10 @@
 .. |docker pulls| image:: https://img.shields.io/docker/pulls/nolte/gitlab-bulkcheckout.svg?style=flat
     :target: https://hub.docker.com/r/nolte/gitlab-bulkcheckout
 
+.. |pypi.org version| image:: https://img.shields.io/pypi/v/gitlab-bulkcheckout.svg?style=flat
+
+.. |pypi.org pyversions| image:: https://img.shields.io/pypi/pyversions/gitlab-bulkcheckout.svg?style=flat
+
 .. _CircleCI: https://circleci.com
 .. _Selenium: https://pytest-selenium.readthedocs.io/en/latest/index.html
 .. _TravisCI: https://travis-ci.org
