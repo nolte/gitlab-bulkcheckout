@@ -44,7 +44,6 @@ https://kb.iu.edu/d/aeww
     -w /tmp/bulkcheckout \
     -v /tmp/bulkcheckout:/tmp/bulkcheckout \
     -v ${HOME}/.ssh:/home/builder/.ssh:ro \
-    -v ${PWD}/groups.yml:/app/groups.yml:ro \
     -v ${PWD}/gitlab_groupMapping.yml:/app/gitlab_groupMapping.yml:ro \
     nolte/gitlab-bulkcheckout -v checkoutbulk
 ```
