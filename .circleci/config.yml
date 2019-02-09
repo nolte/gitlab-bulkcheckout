@@ -313,9 +313,6 @@ workflows:
       - statictests:
           requires:
             - check_grade_up_build
-      - execute_integration_tests:
-          requires:
-            - statictests
       - builddocs:
           requires:
             - statictests
