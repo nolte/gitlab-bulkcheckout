@@ -8,10 +8,9 @@ python:
   - "2.7"
   - "3.4"
   - "3.6"
-matrix:
-  include:
-  - env: SCENARIO_NAME='test'
-  - env: SCENARIO_NAME='flake8,fix_lint,docs'
+env:
+  matrix:
+    - SCENARIO_NAME=tox
 install:
   - pip install tox-travis
 script:
