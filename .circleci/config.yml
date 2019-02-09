@@ -179,6 +179,11 @@ jobs:
             tox -e flake8
       - store_test_results:
           path: .tox/test/tmp/reports
+      - persist_to_workspace:
+          root: /tmp/workspaces/build/.tox/
+          paths:
+              - dist/*
+
   testing:
     <<: *container_python
     working_directory: /tmp/workspaces/build
@@ -304,14 +309,14 @@ jobs:
                 --name "v${CURRENT_VERSION}" \
                 --description "${message}" \
                 --pre-release
-            ls -all /tmp/workspaces/build/.tox/dist/
-            gpg --armor --detach-sign /tmp/workspaces/build/.tox/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
+            ls -all /tmp/workspaces
+            # gpg --armor --detach-sign /tmp/workspaces/build/.tox/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
             github-release upload \
                 --user ${CIRCLE_PROJECT_USERNAME} \
                 --repo ${CIRCLE_PROJECT_REPONAME} \
                 --tag "v${CURRENT_VERSION}" \
                 --name "v${CURRENT_VERSION}" \
-                --file /tmp/workspaces/build/.tox/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
+                --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
       - run:
           name: delete the release branch
           command: |
