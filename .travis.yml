@@ -30,7 +30,7 @@ jobs:
       on:
         distributions: sdist bdist_wheel
         repo: nolte/gitlab-bulkcheckout
-        branch: master
+        branch: notexists
   - stage: deploy pypidev
     if: branch = develop
     python: 3.6
@@ -47,4 +47,4 @@ jobs:
       on:
         distributions: sdist bdist_wheel
         repo: nolte/gitlab-bulkcheckout
-        branch: develop
+        branch: notexists
