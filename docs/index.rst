@@ -1,6 +1,6 @@
 .. include:: ./links.rst
 
-|Travis CI build status| |Codefactor Status| |Documentation Status| |microbadger image| |microbadger version|
+|Travis CI build status| |CircleCI build status| |Codefactor Status| |Documentation Status| |microbadger image| |microbadger version|
 
 .. mdinclude:: ../README.md
 
