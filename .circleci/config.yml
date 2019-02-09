@@ -308,8 +308,6 @@ jobs:
                 --tag "v${CURRENT_VERSION}" \
                 --name "v${CURRENT_VERSION}" \
                 --description "${message}" \
-                --pre-release
-            ls -all /tmp/workspaces
             # gpg --armor --detach-sign /tmp/workspaces/build/.tox/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
             github-release upload \
                 --user ${CIRCLE_PROJECT_USERNAME} \
