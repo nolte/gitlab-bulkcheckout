@@ -315,7 +315,7 @@ jobs:
                 --user ${CIRCLE_PROJECT_USERNAME} \
                 --repo ${CIRCLE_PROJECT_REPONAME} \
                 --tag "v${CURRENT_VERSION}" \
-                --name "v${CURRENT_VERSION}" \
+                --name "gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz" \
                 --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
       - run:
           name: delete the release branch
