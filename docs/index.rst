@@ -1,4 +1,8 @@
 .. include:: ../README.rst
+.. include:: ./links.rst
+
+|Travis CI build status| |Codefactor Status| |Documentation Status| |microbadger image| |microbadger version|
+
 
 Gitlab Bulk Checkout Tool
 ==================================================

@@ -13,6 +13,12 @@
 .. |Codefactor Status| image:: https://www.codefactor.io/repository/github/nolte/gitlab-bulkcheckout/badge
     :target: https://www.codefactor.io/repository/github/nolte/gitlab-bulkcheckout
     :alt: CodeFactor
+.. |microbadger image| image:: https://images.microbadger.com/badges/image/nolte/gitlab-bulkcheckout.svg
+    :target: https://microbadger.com/images/nolte/gitlab-bulkcheckout
+    :alt: image
+.. |microbadger version| image:: https://images.microbadger.com/badges/version/nolte/gitlab-bulkcheckout.svg
+    :target: https://microbadger.com/images/nolte/gitlab-bulkcheckout
+    :alt: version
 
 .. _CircleCI: https://circleci.com
 .. _Selenium: https://pytest-selenium.readthedocs.io/en/latest/index.html

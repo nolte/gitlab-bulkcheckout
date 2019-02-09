@@ -21,7 +21,6 @@ logger = logging.getLogger(__name__)
 def main(verbose, debug_file):
     """Console script for gitlab_bulkcheckout."""
     configure_logger(stream_level="DEBUG" if verbose else "INFO", debug_file=debug_file)
-    pass
 
 
 @main.command(help="get current version")
@@ -47,15 +46,13 @@ def version():
     envvar="GROUPS_MAPPINGS",
     help="Bulk Checkout configuration",
 )
-@click.option(
-    "--base", "-b", default="/tmp/projects", envvar="PROJECTS_BASE", help="The Basedirectory for the local checkout"
-)
+@click.option("--base", "-b", envvar="PROJECTS_BASE", help="The Basedirectory for the local checkout")
 def checkoutbulk(private_token, host, mapping_config_path, base):
     """Checkout Projects from group config."""
 
     click.echo("start bulk download")
     # load the mapping config from filesystem
-    mapping_config = yaml.load(open(mapping_config_path))
+    mapping_config = yaml.load(open(mapping_config_path), Loader=yaml.SafeLoader)
 
     # init the config manager
     checkoutManagers = CheckoutPreferenceManager(mapping_config)

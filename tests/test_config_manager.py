@@ -7,7 +7,7 @@ from gitlab_bulkcheckout.objects import CheckoutPreferenceManager
 
 @pytest.fixture
 def manager():
-    mapping_config = yaml.load(open("./tests/example_config.yml"))
+    mapping_config = yaml.load(open("./tests/example_config.yml"), Loader=yaml.SafeLoader)
     checkoutManagers = CheckoutPreferenceManager(mapping_config)
     return checkoutManagers
 
