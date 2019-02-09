@@ -9,7 +9,7 @@ with open("README.rst") as readme_file:
     readme = readme_file.read()
 
 
-requirements = ["Click==7.0", "pyyaml==3.13", "python-gitlab==1.7.0", "gitpython==2.1.11"]
+requirements = ["Click==7.0", "pyyaml>=4.2b1", "python-gitlab==1.7.0", "gitpython==2.1.11"]
 
 setup_requirements = []
 
