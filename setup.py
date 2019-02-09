@@ -5,8 +5,8 @@
 
 from setuptools import find_packages, setup
 
-with open("README.md") as readme_file:
-    readme = readme_file.read()
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 
 requirements = ["Click==7.0", "pyyaml>=4.2b1", "python-gitlab==1.7.0", "gitpython==2.1.11"]
