@@ -262,7 +262,8 @@ jobs:
           command: |
             git status
             git checkout master
-            git merge -X theirs --verbose ${CIRCLE_BRANCH}
+            git pull origin master
+            git merge -X theirs --no-edit --verbose ${CIRCLE_BRANCH}
             git status
             cat .circleci/config.yml
             git commit -m "merge"
