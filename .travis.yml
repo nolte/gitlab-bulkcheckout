@@ -13,12 +13,12 @@ matrix:
     env: SCENARIO_NAME='flake8,fix_lint,docs'
 install:
 - pip install tox-travis
-- pip install -e ${TRAVIS_BUILD_DIR}
 script:
-#- tox-e ${SCENARIO_NAME} --sdistonly
-- tox 
-deploy:
-  provider: pypi
-  user: nolte07
-  password:
-    secure: DuEEMDdlAIVCkSdZy0qhQO2oBbkFvug9CrIAZ3Gdu3ZtPUaN0GidoaW097erykuQ5xCnAeG8r06ObM3dg5QDmxoLmtFKg/6ZWzFRtfmCi1ZdQuFcjMCVMU9/Kk7aa3HXJ+SqqZ0YUWCwifCnIhla4PaJMUu0WGbgatF1C3vHVl4/aOK6yWw+xuwY3c3nw0HTYDtYxgbAo57wm/3EycyDGEHr+ZGEpdTcUmLs1uZ+TByu1z1IImTqo71CAZloTEa64xNTmbaNDBK3KBIj5agqkkgE5mI0Q1eJwMPlsE1aut657lKJcJAFET/930a4reQ9GtUXmpgXoj8mm8RAnKiF8rN2hu/XpoGx/XJe3RUkJHOTOQojcN/k4Ckhxa7bpj/oT9o+W+kuN/rN8Y4d+BX2ly27LkJA5oEVoaX0YGpJkFIrxPY7q4MIL1P7V4LJ9Uae+dSOmI0r3dJnFc6RnnR+Aivn3fduAoWugZhNqlqxHMYx8b2+qg8/XHr5TVxOG75cBYvWEBbh54WTwiRJG7ds38vrXBFae9QNe5+bxWjzO+HbP1Nr/dq1c0u9mL51SenDrEaoWoNuC+L+LsCKc81TeBCdNvBu3MFSSEoPC4kS20W2wY1ilUZwGZrQC2PzK6XqPUTBTSEilUaZYJBMNCbMD8C04i5NwxZ1c9K8Lum5trQ=
+- tox -e ${SCENARIO_NAME}
+
+jobs:
+  include:
+    - stage: deploy
+      install:
+      - pip install tox-travis
+      script: tox
