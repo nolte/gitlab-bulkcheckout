@@ -1,0 +1,66 @@
+ARG BASE_IMAGE=python:3.7-alpine
+FROM ${BASE_IMAGE} AS BUILDLAYER
+
+
+ARG PUID=1000
+ARG PGID=1000
+ENV PUID=${PUID}
+ENV PGID=${PGID}
+ARG CONTAINER_USER=builder
+#copy the arg to envs for using in the next build layer
+ENV CONTAINER_USER=${CONTAINER_USER}
+
+RUN addgroup -g ${PGID} ${CONTAINER_USER} && \
+    adduser -D -u ${PUID} -G ${CONTAINER_USER} ${CONTAINER_USER}
+
+
+ARG PIP_VERSION=3.7.0
+RUN pip install tox==${PIP_VERSION}
+
+RUN apk add --update \
+    tar \
+    git \
+  && rm -rf /var/cache/apk/*
+
+FROM BUILDLAYER as BUILDER
+
+
+ARG APP_FOLDER=/app
+COPY . ${APP_FOLDER}
+RUN mkdir -p ${APP_FOLDER} && \
+  chown -R ${CONTAINER_USER}:${CONTAINER_USER} ${APP_FOLDER}
+
+USER ${CONTAINER_USER}
+WORKDIR ${APP_FOLDER}
+
+RUN tox -e test,docs
+
+RUN ls -all /app/.tox/dist/
+
+FROM ${BASE_IMAGE} AS EXECUTOR
+ARG APP_FOLDER=/app
+ARG PUID=1000
+ARG PGID=1000
+ARG CONTAINER_USER=builder
+
+COPY --from=BUILDER /app/.tox/dist/gitlab_bulkcheckout-*.tar.gz /tmp/gitlab_bulkcheckout.tar.gz
+
+RUN pip install /tmp/gitlab_bulkcheckout.tar.gz
+
+RUN addgroup -g ${PGID} ${CONTAINER_USER} && \
+    adduser -D -u ${PUID} -G ${CONTAINER_USER} ${CONTAINER_USER} && \
+    mkdir -p ${APP_FOLDER} && \
+    chown -R ${CONTAINER_USER}:${CONTAINER_USER} ${APP_FOLDER}
+
+RUN apk add --update \
+    git \
+    openssh-client \
+  && rm -rf /var/cache/apk/*
+
+USER ${CONTAINER_USER}
+
+WORKDIR ${APP_FOLDER}
+
+ENTRYPOINT ["gitlab_bulkcheckout"]
+#,"gitlab-bulkcheckout"
+CMD ["--help"]
