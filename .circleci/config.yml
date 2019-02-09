@@ -304,6 +304,8 @@ jobs:
           command: |
             ls -all
             git status
+            git checkout master
+            git merge ${CIRCLE_BRANCH}
             git push origin master
             git push origin --delete ${CIRCLE_BRANCH}
 
