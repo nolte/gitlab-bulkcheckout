@@ -260,6 +260,7 @@ jobs:
       - run:
           name: merge to master
           command: |
+            git status
             git checkout master
             git merge ${CIRCLE_BRANCH}
             git commit -m "merge"
