@@ -45,4 +45,4 @@ jobs:
       on:
         distributions: sdist bdist_wheel
         repo: nolte/gitlab-bulkcheckout
-        branch: notexists
+        branch: develop
