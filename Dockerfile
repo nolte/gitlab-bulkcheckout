@@ -43,9 +43,9 @@ ARG PUID=1000
 ARG PGID=1000
 ARG CONTAINER_USER=builder
 
-COPY --from=BUILDER /app/.tox/dist/gitlab_bulkcheckout-*.tar.gz /tmp/gitlab_bulkcheckout.tar.gz
+COPY --from=BUILDER /app/.tox/dist/gitlab_bulkcheckout-*.zip /tmp/gitlab_bulkcheckout.zip
 
-RUN pip install /tmp/gitlab_bulkcheckout.tar.gz
+RUN pip install /tmp/gitlab_bulkcheckout.zip
 
 RUN addgroup -g ${PGID} ${CONTAINER_USER} && \
     adduser -D -u ${PUID} -G ${CONTAINER_USER} ${CONTAINER_USER} && \
