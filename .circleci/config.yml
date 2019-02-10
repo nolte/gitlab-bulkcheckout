@@ -117,6 +117,31 @@ aliases:
         chmod +x ${HOME}/chromedriver
         sudo sh /tmp/workspaces/build/ci-scripts/install_selenium_dependencies.sh
 
+  # @see https://circleci.com/blog/continuously-deploying-python-packages-to-pypi-with-circleci/
+  - &run_task_pypirc_configure
+    run:
+      name: init .pypirc
+      command: |
+        echo -e "[pypi]" >> ~/.pypirc
+        echo -e "username = $PYPI_USER" >> ~/.pypirc
+        echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+
+  # @see https://tox.readthedocs.io/en/latest/install.html
+  - &run_task_pypirc_install_dependencies
+    run:
+      name: install tox dependencies
+      command: |
+        sudo apt-get -qq update
+        sudo apt install -y build-essential libssl-dev libpython-dev python python-pip
+        sudo pip install twine
+
+  - &run_task_pypirc_upload_artefacts
+    run:
+      name: upload to pypi
+      command: |
+        twine upload /tmp/workspaces/dist/*
+
+
 jobs:
 
   # generate a changelog from existing github commits/pull requests
@@ -139,6 +164,16 @@ jobs:
           root: /tmp/workspaces/changelog
           paths:
               - CHANGELOG.md
+
+  uploadpypi:
+    <<: *container_python
+    working_directory: /tmp/workspaces/build
+    steps:
+      - attach_workspace:
+          at: /tmp/workspaces
+      - *run_task_pypirc_configure
+      - *run_task_pypirc_install_dependencies
+      - *run_task_pypirc_upload_artefacts
 
   builddocs:
     <<: *container_python
@@ -410,3 +445,6 @@ workflows:
       - create_gh_release:
           requires:
             - generate-changelog
+      - uploadpypi:
+          requires:
+            - create_gh_release
