@@ -102,7 +102,7 @@ aliases:
       name: install tox dependencies
       command: |
         sudo apt-get -qq update
-        sudo apt install -y tar build-essential libssl-dev libpython-dev python python-pip
+        sudo apt install -y build-essential libssl-dev libpython-dev python python-pip
         sudo pip install tox
 
   # @see http://chromedriver.chromium.org/
@@ -142,8 +142,8 @@ aliases:
         CURRENT_VERSION="$(cat /tmp/workspaces/current_version.txt)"
         ls -all /tmp/workspaces/dist/*
         twine upload \
-          /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz \
-          /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz.asc
+          /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.zip \
+          /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.zip.asc
 
 jobs:
 
@@ -250,7 +250,7 @@ jobs:
             ls -all /tmp/workspaces/sign/*
             echo $DECRYPT_KEY | gpg --passphrase-fd 0 /tmp/workspaces/sign/signing-data/keys.asc.gpg
             gpg --batch --yes --import /tmp/workspaces/sign/signing-data/keys.asc
-            echo $SIGN_KEY | gpg --passphrase-fd 0 -u 027D44F7 --armor --detach-sig /tmp/workspaces/dist/gitlab_bulkcheckout-*.tar.gz
+            echo $SIGN_KEY | gpg --passphrase-fd 0 -u 027D44F7 --armor --detach-sig /tmp/workspaces/dist/gitlab_bulkcheckout-*.zip
             rm /tmp/workspaces/sign/signing-data/keys.asc
       - persist_to_workspace:
           root: /tmp/workspaces/
@@ -389,15 +389,15 @@ jobs:
                 --user ${CIRCLE_PROJECT_USERNAME} \
                 --repo ${CIRCLE_PROJECT_REPONAME} \
                 --tag "v${CURRENT_VERSION}" \
-                --name "gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz" \
-                --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
+                --name "gitlab_bulkcheckout-${CURRENT_VERSION}.zip" \
+                --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.zip
 
             github-release upload \
                 --user ${CIRCLE_PROJECT_USERNAME} \
                 --repo ${CIRCLE_PROJECT_REPONAME} \
                 --tag "v${CURRENT_VERSION}" \
-                --name "gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz.asc" \
-                --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz.asc
+                --name "gitlab_bulkcheckout-${CURRENT_VERSION}.zip.asc" \
+                --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.zip.asc
 
 
       - run:
