@@ -58,6 +58,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/nolte/gitlab-bulkcheckout",
-    version="0.22.0.dev",
+    version="0.22.0",
     zip_safe=False,
 )
