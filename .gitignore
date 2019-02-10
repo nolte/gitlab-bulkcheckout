@@ -1,6 +1,7 @@
 dist
 build
 docs/api
+keys.asc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

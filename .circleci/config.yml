@@ -4,12 +4,16 @@ aliases:
   # SSH Deployment key for github Pushing,
   - &deploy_ssh_fingerprint "4e:17:0c:86:25:75:37:16:c4:a9:e9:3e:91:23:b1:cb"
 
+  - &deploy_ssh_sign_fingerprint "5c:5e:79:96:0e:de:3e:cf:cf:ab:1d:96:da:b8:a8:72"
+
   # add the GitHub Deployment Key to the ssh-agent
   # @see https://circleci.com/docs/2.0/add-ssh-key/
   - &run_task_add_key
     add_ssh_keys:
       fingerprints:
         - *deploy_ssh_fingerprint
+        - *deploy_ssh_sign_fingerprint
+
   - &run_task_add_gh_known_hosts
     run:
       name: Keyscan Github (HACK)
@@ -177,12 +181,44 @@ jobs:
           name: execute the flake8 static tests
           command: |
             tox -e flake8
+
+
       - store_test_results:
           path: .tox/test/tmp/reports
       - persist_to_workspace:
           root: /tmp/workspaces/build/.tox/
           paths:
               - dist/*
+
+  signartefact:
+    <<: *container_python
+    working_directory: /tmp/workspaces/build
+    steps:
+      - *run_task_configure_git
+      - *run_task_add_key
+      - *run_task_add_gh_known_hosts
+      - attach_workspace:
+          at: /tmp/workspaces
+      - *run_task_load_current_version_bumpversion_cfg
+      - run:
+          name: get the signing key
+          command: |
+            git clone git@github.com:nolte/signing-data.git /tmp/workspaces/sign/signing-data
+      - run:
+          name: signing the archive
+          command: |
+            CURRENT_VERSION="$(cat /tmp/workspaces/current_version.txt)"
+            ls -all /tmp/workspaces/sign/*
+            echo $DECRYPT_KEY | gpg --passphrase-fd 0 /tmp/workspaces/sign/signing-data/keys.asc.gpg
+            gpg --batch --yes --import /tmp/workspaces/sign/signing-data/keys.asc
+            echo $SIGN_KEY | gpg --passphrase-fd 0 -u 027D44F7 --armor --detach-sig /tmp/workspaces/dist/gitlab_bulkcheckout-*.tar.gz
+            rm /tmp/workspaces/sign/signing-data/keys.asc
+      - persist_to_workspace:
+          root: /tmp/workspaces/
+          paths:
+              - dist/*
+      - store_artifacts:
+          path: /tmp/workspaces/dist
 
   testing:
     <<: *container_python
@@ -308,6 +344,7 @@ jobs:
                 --tag "v${CURRENT_VERSION}" \
                 --name "v${CURRENT_VERSION}" \
                 --description "${message}" \
+                --pre-release
             # gpg --armor --detach-sign /tmp/workspaces/build/.tox/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
             github-release upload \
                 --user ${CIRCLE_PROJECT_USERNAME} \
@@ -315,6 +352,15 @@ jobs:
                 --tag "v${CURRENT_VERSION}" \
                 --name "gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz" \
                 --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz
+
+            github-release upload \
+                --user ${CIRCLE_PROJECT_USERNAME} \
+                --repo ${CIRCLE_PROJECT_REPONAME} \
+                --tag "v${CURRENT_VERSION}" \
+                --name "gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz.asc" \
+                --file /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz.asc
+
+
       - run:
           name: delete the release branch
           command: |
@@ -330,12 +376,15 @@ workflows:
       - statictests:
           requires:
             - check_grade_up_build
+      - signartefact:
+          requires:
+            - statictests
       - builddocs:
           requires:
-            - statictests
+            - signartefact
       - testing:
           requires:
-            - statictests
+            - signartefact
       - publishghpage:
           requires:
             - builddocs
