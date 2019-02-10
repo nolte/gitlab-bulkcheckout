@@ -139,8 +139,11 @@ aliases:
     run:
       name: upload to pypi
       command: |
-        twine upload /tmp/workspaces/dist/*
-
+        CURRENT_VERSION="$(cat /tmp/workspaces/current_version.txt)"
+        ls -all /tmp/workspaces/dist/*
+        twine upload \
+          /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz \
+          /tmp/workspaces/dist/gitlab_bulkcheckout-${CURRENT_VERSION}.tar.gz.asc
 
 jobs:
 
@@ -171,6 +174,7 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspaces
+      - *run_task_load_current_version_bumpversion_cfg
       - *run_task_pypirc_configure
       - *run_task_pypirc_install_dependencies
       - *run_task_pypirc_upload_artefacts
