@@ -2,7 +2,7 @@
 .. mdinclude:: ../README.md
 
 
-Gitlab Bulk Checkout Tool
+GitLab Bulk Checkout Tool
 ==================================================
 
 Getting Started

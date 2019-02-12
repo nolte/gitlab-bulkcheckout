@@ -39,7 +39,7 @@ Container Run Parameters
 
 ``-e GITLAB_TOKEN``
   `Gitlab Access Token <https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html>`_ for using the `Gitlab API <https://docs.gitlab.com/ee/api/>`_ (see: :ref:`cli-parameters`)
-  This example use the Commandline Tool `pass <https://www.passwordstore.org/>`_ for manage this secret.
+  This example use the Command-line Tool `pass <https://www.passwordstore.org/>`_ for manage this secret.
 
 ``-e PROJECTS_BASE``
   The Local Checkout Location, this path should be mapped to your Host System, (see: :ref:`cli-parameters`).

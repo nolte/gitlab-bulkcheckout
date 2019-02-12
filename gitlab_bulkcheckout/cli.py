@@ -36,9 +36,9 @@ def version():
     "-h",
     default="https://gitlab.com",
     envvar="GITLAB_HOST",
-    help="Url from the Gitlab Server, like https://gitlab.com",
+    help="URL from the GitLab Server, like https://gitlab.com",
 )
-@click.option("--private-token", envvar="GITLAB_TOKEN", help="Gitlab Private Acccess Token")
+@click.option("--private-token", envvar="GITLAB_TOKEN", help="GitLab Private Access Token")
 @click.option(
     "--mapping-config-path",
     "-m",
@@ -46,12 +46,12 @@ def version():
     envvar="GROUPS_MAPPINGS",
     help="Bulk Checkout configuration",
 )
-@click.option("--base", "-b", envvar="PROJECTS_BASE", help="The Basedirectory for the local checkout")
+@click.option("--base", "-b", envvar="PROJECTS_BASE", help="The Base directory for the local checkout")
 def checkoutbulk(private_token, host, mapping_config_path, base):
-    """Checkout Projects from group config."""
+    """Commandline Entrypoint for Checkout Projects from a GitLab group."""
 
     click.echo("start bulk download")
-    # load the mapping config from filesystem
+    # load the mapping configuration from filesystem
     mapping_config = yaml.load(open(mapping_config_path), Loader=yaml.SafeLoader)
 
     # init the config manager

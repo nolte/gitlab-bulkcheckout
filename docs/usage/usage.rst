@@ -12,7 +12,7 @@ Usage
 
 .. _cli-config:
 
-Config
+Configuration
 ----------------------------------------------
 
 
