@@ -102,7 +102,7 @@ aliases:
       name: install tox dependencies
       command: |
         sudo apt-get -qq update
-        sudo apt install -y build-essential libssl-dev libpython-dev python python-pip
+        sudo apt install -y enchant build-essential libssl-dev libpython-dev python python-pip
         sudo pip install tox
 
   # @see http://chromedriver.chromium.org/
