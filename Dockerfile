@@ -20,7 +20,10 @@ RUN pip install tox==${PIP_VERSION}
 
 RUN apk --no-cache add  \
     tar \
-    git
+    git \
+    enchant \
+    aspell-en \
+    aspell
 
 FROM BUILDLAYER as BUILDER
 
