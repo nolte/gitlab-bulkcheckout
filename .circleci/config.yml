@@ -249,8 +249,7 @@ jobs:
             CURRENT_VERSION="$(cat /tmp/workspaces/current_version.txt)"
             ls -all /tmp/workspaces/sign/*
             export GPG_TTY=$(tty)
-            sudo apt-get install gnupg gnupg-agent pinentry-curses pinentry-gtk2 
-
+            sudo apt-get install gnupg gnupg-agent pinentry-curses pinentry-gtk2
             export LIFE=28800
             export GPG_TTY=$(tty)
             # Make sure the gpg-agent is running
@@ -259,10 +258,9 @@ jobs:
                 export GPG_AGENT_INFO
             else
                 eval $(gpg-agent --daemon )
-            fi
-            
+            fi            
             #source ~/.gpg-agent-info
-            export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1           
+            export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
             gpg --version
             echo $DECRYPT_KEY | gpg --batch --passphrase-fd 0 /tmp/workspaces/sign/signing-data/keys.asc.gpg
             gpg --batch --yes --import /tmp/workspaces/sign/signing-data/keys.asc
