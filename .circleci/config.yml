@@ -258,7 +258,7 @@ jobs:
                 export GPG_AGENT_INFO
             else
                 eval $(gpg-agent --daemon )
-            fi            
+            fi
             #source ~/.gpg-agent-info
             export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
             gpg --version
