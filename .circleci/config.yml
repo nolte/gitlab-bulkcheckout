@@ -93,7 +93,7 @@ aliases:
   # Used container for python based uilds
   - &container_python
     docker:
-      - image: circleci/python:3.6-stretch-node-browsers-legacy
+      - image: circleci/python:3.7.1-stretch
 
   # @see https://tox.readthedocs.io/en/latest/install.html
   # Install tox required system dependencies
@@ -248,9 +248,27 @@ jobs:
           command: |
             CURRENT_VERSION="$(cat /tmp/workspaces/current_version.txt)"
             ls -all /tmp/workspaces/sign/*
-            echo $DECRYPT_KEY | gpg --passphrase-fd 0 /tmp/workspaces/sign/signing-data/keys.asc.gpg
+            export GPG_TTY=$(tty)
+            sudo apt-get install gnupg gnupg-agent pinentry-curses pinentry-gtk2 
+
+            export LIFE=28800
+            export GPG_TTY=$(tty)
+            # Make sure the gpg-agent is running
+            if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
+                source ~/.gnupg/.gpg-agent-info
+                export GPG_AGENT_INFO
+            else
+                eval $(gpg-agent --daemon )
+            fi
+            
+            #source ~/.gpg-agent-info
+            export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1           
+            gpg --version
+            echo $DECRYPT_KEY | gpg --batch --passphrase-fd 0 /tmp/workspaces/sign/signing-data/keys.asc.gpg
             gpg --batch --yes --import /tmp/workspaces/sign/signing-data/keys.asc
-            echo $SIGN_KEY | gpg --passphrase-fd 0 -u 027D44F7 --armor --detach-sig /tmp/workspaces/dist/gitlab_bulkcheckout-*.zip
+            echo "debug"
+            echo $SIGN_KEY | gpg --batch --yes --passphrase-fd 0 --local-user 027D44F7 --pinentry-mode=loopback --armor --detach-sig /tmp/workspaces/dist/gitlab_bulkcheckout-*.zip
+            echo "debug 2"
             rm /tmp/workspaces/sign/signing-data/keys.asc
       - persist_to_workspace:
           root: /tmp/workspaces/
