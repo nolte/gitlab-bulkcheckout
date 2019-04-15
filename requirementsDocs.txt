@@ -1,5 +1,5 @@
 sphinx==2.0.1
-sphinxcontrib-plantuml==0.14
+sphinxcontrib-plantuml==0.15
 sphinx_rtd_theme==0.4.3
 PyYAML>=4.2b1
 m2r==0.2.1
