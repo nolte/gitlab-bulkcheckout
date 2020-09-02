@@ -21,7 +21,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 
-requirements = ["Click==7.0", "pyyaml>=4.2b1", "python-gitlab==1.8.0", "gitpython==2.1.11"]
+requirements = ["Click==7.0", "pyyaml>=4.2b1", "python-gitlab==2.5.0", "gitpython==2.1.11"]
 
 setup_requirements = []
 
