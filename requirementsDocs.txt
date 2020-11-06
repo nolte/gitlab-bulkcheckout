@@ -5,4 +5,4 @@ PyYAML>=4.2b1
 m2r==0.2.1
 sphinx-click==2.1.0
 sphinxcontrib-apidoc==0.3.0
-sphinxcontrib-spelling==4.2.1
+sphinxcontrib-spelling==7.1.0
